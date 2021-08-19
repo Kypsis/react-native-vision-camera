@@ -169,6 +169,8 @@ class CameraView(context: Context) : FrameLayout(context), LifecycleOwner {
     }
     scaleGestureDetector = ScaleGestureDetector(context, scaleGestureListener)
     touchEventListener = OnTouchListener { _, event -> return@OnTouchListener scaleGestureDetector.onTouchEvent(event) }
+    
+    rotation = context.displayRotation
     orientationEventListener = object : OrientationEventListener(context) {
       override fun onOrientationChanged(orientation : Int) {
         rotation = when (orientation) {
