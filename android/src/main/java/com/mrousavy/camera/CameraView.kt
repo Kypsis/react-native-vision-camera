@@ -114,7 +114,7 @@ class CameraView(context: Context) : FrameLayout(context), LifecycleOwner {
   private val lifecycleRegistry: LifecycleRegistry
   private var hostLifecycleState: Lifecycle.State
 
-  private var rotation: Int = Surface.ROTATION_0
+  private var rotation: Int
 
   private var minZoom: Float = 1f
   private var maxZoom: Float = 1f
@@ -231,6 +231,8 @@ class CameraView(context: Context) : FrameLayout(context), LifecycleOwner {
    */
   private fun updateLifecycleState() {
     val lifecycleBefore = lifecycleRegistry.currentState
+    rotation = context.displayRotation
+    
     if (hostLifecycleState == Lifecycle.State.RESUMED) {
       // Host Lifecycle (Activity) is currently active (RESUMED), so we narrow it down to the view's lifecycle
       if (isActive && isAttachedToWindow) {
